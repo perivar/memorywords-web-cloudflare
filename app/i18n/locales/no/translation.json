@@ -1,0 +1,12 @@
+{
+  "description": "Det Mnemoniske Store Systemet konverterer tall til konsonant-lyder som kan danne ord som er lett å huske. \nDenne norske tilpasningen er med på å huske lange tall som π (3.1415926535897932384) gjennom assosiasjoner til ord.",
+  "settings": {
+    "language": "Språk",
+    "theme": "Tema",
+    "theme_dark": "Mørk",
+    "theme_light": "Lys",
+    "title": "Innstillinger"
+  },
+  "title": "Minneord konverterer",
+  "welcome_to": "Velkommen til"
+}

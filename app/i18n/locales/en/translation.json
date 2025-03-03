@@ -1,5 +1,36 @@
 {
+  "convert": {
+    "convert_words_to_digits": "Convert Words to Digits",
+    "enter_number": "Enter Number",
+    "enter_number_description": "Enter a number to find Norwegian words that can help you remember it. For example: \"53\" can be \"LAM\" (L=5, M=3).",
+    "enter_words": "Enter Word(s)",
+    "enter_words_description": "Enter Norwegian words to see their digit representations. For example: \"LAM\" becomes \"53\" (L=5, M=3).",
+    "finding_words": "Finding words...",
+    "for_more_info": "For the complete Norwegian and original English mapping system see",
+    "found_digits": "Found digits",
+    "loading_dictionary": "Loading dictionary...",
+    "number_for_words": "Number for Words",
+    "processing": "Processing...",
+    "result": "Result",
+    "show_words": "Show Words",
+    "words_for_number": "Words for Number"
+  },
   "description": "The Mnemonic Major System converts numbers to consonant sounds that can form memorable words. This Norwegian adaptation helps remember long numbers like π (3.1415926535897932384) through word associations.",
+  "help": {
+    "associated_letters": "Associated Letters & Examples",
+    "digit": "Digit",
+    "example": "Example",
+    "example_description": "For example: The number \"53138552\" becomes",
+    "how_it_works": "How does the Major System work?",
+    "how_it_works_description": "This mnemonic system is based on the substitution of consonant sounds with digits. With this technique you can represent numeric sequences using words. Since remembering words is far more easy than numbers, this system can be used to easily remember numerical sequences, like telephone numbers or year dates. For the number you want to remember you find corresponding words which you turn into a catchy story. The made up story should be very unusual so it sticks.",
+    "norwegian_adaptation": "Norwegian adaptation",
+    "norwegian_adaptation_description": "For this program, the Mnemonic Major System has been modified to better suit Norwegian phonetics. In particular, digit 6 has been adapted to only match the /ʃ/ and /tʃ/ sounds, which in Norwegian are represented by combinations like sj, skj, kj, and tj.",
+    "norwegian_mapping_table": "Norwegian Mapping Table",
+    "notes": "Notes",
+    "original_mapping": "Original Mapping Table in English",
+    "speach_sounds": "Speech Sounds (IPA)",
+    "title": "Help"
+  },
   "settings": {
     "language": "Language",
     "theme": "Theme",
@@ -7,6 +38,5 @@
     "theme_light": "Light",
     "title": "Settings"
   },
-  "title": "Memory Words Converter",
-  "welcome_to": "Welcome to"
+  "title": "Memory Words Converter"
 }

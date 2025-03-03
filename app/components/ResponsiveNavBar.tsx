@@ -39,7 +39,7 @@ export default function ResponsiveNavBar() {
   const navBrand = t("title");
 
   const navItems = [
-    // { title: t("frontpage.title"), to: "/frontpage" },
+    { title: t("help.title"), to: "/help" },
     { title: t("settings.title"), to: "/settings" },
   ];
 

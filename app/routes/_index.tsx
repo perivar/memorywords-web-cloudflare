@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import type { LoaderFunctionArgs, MetaFunction } from "@remix-run/cloudflare";
-import { json } from "@remix-run/react";
+import { json, Link } from "@remix-run/react";
 import i18next from "~/i18n/i18n.server";
 import { DigitsWords } from "~/utils/DigitsWords";
 import { parseDigits, toMnemonic } from "~/utils/mnemonic";
@@ -121,39 +121,41 @@ export default function Index() {
         <div className="mb-8 rounded-lg p-6 shadow">
           <p className="mb-4">{t("description")}</p>
           <p className="mb-4">
-            For example: The number {"53138552"} becomes:
+            {t("help.example_description")}
             <br />
             {"LAM"} (5=L, 3=M) - {"DUM"} (1=D, 3=M) - {"FLY"} (8=F, 5=L) -{""}
             {"LYN"} (5=L, 2=N)
           </p>
-          <p className="">
-            See the reference table below for the complete Norwegian mapping
-            system.
+          <p>
+            {t("convert.for_more_info")}{" "}
+            <Link to="/help" className="text-blue-500">
+              {t("help.title")}
+            </Link>
+            .
           </p>
         </div>
 
         {isLoading ? (
           <div className="flex items-center justify-center py-4">
             <div className="size-8 animate-spin rounded-full border-b-2 border-blue-500"></div>
-            <span className="ml-3">Loading dictionary...</span>
+            <span className="ml-3">{t("convert.loading_dictionary")}</span>
           </div>
         ) : (
           <>
             {/* Words for Number Section */}
             <div className="mb-6 rounded-lg p-6 shadow">
-              <h2 className="mb-2 text-xl font-semibold">Words for Number</h2>
+              <h2 className="mb-2 text-xl font-semibold">
+                {t("convert.words_for_number")}
+              </h2>
               <p className="mb-4 text-sm">
-                Enter a number to find Norwegian words that can help you
-                remember it using the mapping table above. For example: {"53"}
-                {""}
-                can be {"LAM"} (L=5, M=3).
+                {t("convert.enter_number_description")}
               </p>
               <form onSubmit={handleDigitSubmit} className="mb-6">
                 <div className="mb-4">
                   <Label
                     htmlFor="digits"
                     className="mb-1 block text-sm font-medium">
-                    Enter Number
+                    {t("convert.enter_number")}
                   </Label>
                   <Input
                     type="text"
@@ -161,7 +163,7 @@ export default function Index() {
                     value={digits}
                     onChange={e => setDigits(e.target.value)}
                     className="w-full rounded-md border px-3 py-2"
-                    placeholder={`Enter a number (default: ${DEFAULT_DIGITS})`}
+                    placeholder={`${t("convert.enter_number")} (default: ${DEFAULT_DIGITS})`}
                   />
                 </div>
                 <Button
@@ -172,7 +174,9 @@ export default function Index() {
                       ? "cursor-not-allowed opacity-50"
                       : "hover:bg-blue-700"
                   }`}>
-                  {isProcessing ? "Processing..." : "Show Words"}
+                  {isProcessing
+                    ? `${t("convert.processing")}`
+                    : `${t("convert.show_words")}`}
                 </Button>
               </form>
 
@@ -181,14 +185,14 @@ export default function Index() {
                   {isProcessing && (
                     <div className="flex items-center justify-center py-4">
                       <div className="size-8 animate-spin rounded-full border-b-2 border-blue-500"></div>
-                      <span className="ml-3">Finding words...</span>
+                      <span className="ml-3">{t("convert.finding_words")}</span>
                     </div>
                   )}
 
                   {wordGroups.map((group, groupIndex) => (
                     <div key={groupIndex} className="rounded-md p-4">
                       <h3 className="mb-3 text-lg font-medium">
-                        Found digits {group.Digits.join(",")}:
+                        {t("convert.found_digits")} {group.Digits.join(",")}:
                       </h3>
                       <div className="pl-4">
                         <div className="columns-3 gap-4">
@@ -209,19 +213,18 @@ export default function Index() {
 
             {/* Number for Words Section */}
             <div className="rounded-lg p-6 shadow">
-              <h2 className="mb-2 text-xl font-semibold">Number for Words</h2>
+              <h2 className="mb-2 text-xl font-semibold">
+                {t("convert.number_for_words")}
+              </h2>
               <p className="mb-4 text-sm">
-                Enter Norwegian words to see their digit representations using
-                the mapping table above. For example: {"LAM"} becomes {"53"}
-                {""}
-                (L=5, M=3).
+                {t("convert.enter_words_description")}
               </p>
               <form onSubmit={handleWordSubmit} className="mb-6">
                 <div className="mb-4">
                   <Label
                     htmlFor="words"
                     className="mb-1 block text-sm font-medium">
-                    Enter Word(s)
+                    {t("convert.enter_words")}
                   </Label>
                   <Input
                     type="text"
@@ -229,19 +232,21 @@ export default function Index() {
                     value={words}
                     onChange={e => setWords(e.target.value)}
                     className="w-full rounded-md border px-3 py-2"
-                    placeholder={`Enter word(s) (default: ${DEFAULT_WORDS})`}
+                    placeholder={`${t("convert.enter_words")} (default: ${DEFAULT_WORDS})`}
                   />
                 </div>
                 <Button
                   type="submit"
                   className="w-full rounded-md bg-blue-600 px-4 py-2 text-white hover:bg-blue-700">
-                  Convert Words to Digits
+                  {t("convert.convert_words_to_digits")}
                 </Button>
               </form>
 
               {mnemonicResult && (
                 <div className="mt-6 rounded-md p-4">
-                  <h3 className="mb-2 text-lg font-medium">Result</h3>
+                  <h3 className="mb-2 text-lg font-medium">
+                    {t("convert.result")}
+                  </h3>
                   <pre className="whitespace-pre font-mono text-sm">
                     {mnemonicResult}
                   </pre>
@@ -250,122 +255,6 @@ export default function Index() {
             </div>
           </>
         )}
-
-        <div className="mt-8 rounded-lg p-6 shadow">
-          <h2 className="mb-2 text-xl font-semibold">
-            Norwegian Mapping Table
-          </h2>
-          <table className="min-w-full border">
-            <thead>
-              <tr>
-                <th className="border-b px-4 py-2 text-sm">Digit</th>
-                <th className="border-b px-4 py-2 text-sm">
-                  Speech Sounds (IPA)
-                </th>
-                <th className="border-b px-4 py-2 text-sm">
-                  Associated Letters & Examples
-                </th>
-                <th className="border-b px-4 py-2 text-sm">Notes</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td className="border-b px-4 py-2 text-sm">0</td>
-                <td className="border-b px-4 py-2 text-sm">/s/, /z/</td>
-                <td className="border-b px-4 py-2 text-sm">
-                  S som i Sirkel, Z som i Zalo
-                </td>
-                <td className="border-b px-4 py-2 text-sm">
-                  Sirkel eller 0 på engelsk ZERO
-                </td>
-              </tr>
-              <tr>
-                <td className="border-b px-4 py-2 text-sm">1</td>
-                <td className="border-b px-4 py-2 text-sm">/t/, /d/</td>
-                <td className="border-b px-4 py-2 text-sm">
-                  T som i Tal, D som i Dal
-                </td>
-                <td className="border-b px-4 py-2 text-sm">
-                  t og d har én nedstrek
-                </td>
-              </tr>
-              <tr>
-                <td className="border-b px-4 py-2 text-sm">2</td>
-                <td className="border-b px-4 py-2 text-sm">/n/</td>
-                <td className="border-b px-4 py-2 text-sm">N som i Nei</td>
-                <td className="border-b px-4 py-2 text-sm">
-                  n har to nedstreker
-                </td>
-              </tr>
-              <tr>
-                <td className="border-b px-4 py-2 text-sm">3</td>
-                <td className="border-b px-4 py-2 text-sm">/m/</td>
-                <td className="border-b px-4 py-2 text-sm">M som i Meg</td>
-                <td className="border-b px-4 py-2 text-sm">
-                  m har tre nedstreker
-                </td>
-              </tr>
-              <tr>
-                <td className="border-b px-4 py-2 text-sm">4</td>
-                <td className="border-b px-4 py-2 text-sm">/r/</td>
-                <td className="border-b px-4 py-2 text-sm">R som i Rein</td>
-                <td className="border-b px-4 py-2 text-sm">
-                  tenk på fiRe, eller R som i rein, fire bein
-                </td>
-              </tr>
-              <tr>
-                <td className="border-b px-4 py-2 text-sm">5</td>
-                <td className="border-b px-4 py-2 text-sm">/l/</td>
-                <td className="border-b px-4 py-2 text-sm">L som i Liv</td>
-                <td className="border-b px-4 py-2 text-sm">
-                  Romertallet L er 50
-                </td>
-              </tr>
-              <tr>
-                <td className="border-b px-4 py-2 text-sm">6</td>
-                <td className="border-b px-4 py-2 text-sm">/ʃ/, /tʃ/</td>
-                <td className="border-b px-4 py-2 text-sm">
-                  SJ som i Sjø, SKJ som i Skje, KJ som i Kjede, TJ som i Tjue
-                </td>
-                <td className="border-b px-4 py-2 text-sm">
-                  J har en kurve nederst slik som 6 har
-                </td>
-              </tr>
-              <tr>
-                <td className="border-b px-4 py-2 text-sm">7</td>
-                <td className="border-b px-4 py-2 text-sm">/k/, /g/</td>
-                <td className="border-b px-4 py-2 text-sm">
-                  K som i Kul, G som i Gul
-                </td>
-                <td className="border-b px-4 py-2 text-sm">
-                  K inneholder to 7-tall
-                </td>
-              </tr>
-              <tr>
-                <td className="border-b px-4 py-2 text-sm">8</td>
-                <td className="border-b px-4 py-2 text-sm">/f/, /v/</td>
-                <td className="border-b px-4 py-2 text-sm">
-                  F som i Fisk, V som i Visk
-                </td>
-                <td className="border-b px-4 py-2 text-sm">
-                  Jeg assosierer V med V8. F lyder som V når den uttales. F
-                  ligner på 8
-                </td>
-              </tr>
-              <tr>
-                <td className="border-b px-4 py-2 text-sm">9</td>
-                <td className="border-b px-4 py-2 text-sm">/p/, /b/</td>
-                <td className="border-b px-4 py-2 text-sm">
-                  P som i Pil, B som i Bil
-                </td>
-                <td className="border-b px-4 py-2 text-sm">
-                  9 rotert 180 grader ser ut som b. 9 speilvendt ser ut som P. P
-                  og B lyder likt når de uttales.
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
       </div>
     </div>
   );

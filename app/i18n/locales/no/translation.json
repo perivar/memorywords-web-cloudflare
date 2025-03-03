@@ -1,5 +1,36 @@
 {
-  "description": "Det Mnemoniske Store Systemet konverterer tall til konsonant-lyder som kan danne ord som er lett å huske. \nDenne norske tilpasningen er med på å huske lange tall som π (3.1415926535897932384) gjennom assosiasjoner til ord.",
+  "convert": {
+    "convert_words_to_digits": "Konverter ord til sifre",
+    "enter_number": "Angi nummer",
+    "enter_number_description": "Skriv inn et nummer for å finne norske ord som kan hjelpe deg med å huske det. For eksempel: \"53\" kan være \"LAM\" (l = 5, m = 3).",
+    "enter_words": "Skriv inn ord (er)",
+    "enter_words_description": "Skriv inn norske ord for å se deres sifferrepresentasjoner. For eksempel: \"LAM\" blir \"53\" (l = 5, m = 3).",
+    "finding_words": "Finner ord ...",
+    "for_more_info": "For det komplette norske og originale engelsk mapping-tabellen se",
+    "found_digits": "Fant sifre",
+    "loading_dictionary": "Laster ordbok ...",
+    "number_for_words": "Nummer for ord",
+    "processing": "Behandler ...",
+    "result": "Resultat",
+    "show_words": "Vis ord",
+    "words_for_number": "Ord for nummer"
+  },
+  "description": "Det Mnemoniske Store Systemet konverterer tall til konsonant-lyder som kan danne ord som er lett å huske. Denne norske tilpasningen er med på å huske lange tall som π (3.1415926535897932384) gjennom assosiasjoner til ord.",
+  "help": {
+    "associated_letters": "Tilknyttede bokstaver",
+    "digit": "Siffer",
+    "example": "Eksempel",
+    "example_description": "For eksempel: nummeret \"53138552\" blir",
+    "how_it_works": "Hvordan fungerer det store systemet?",
+    "how_it_works_description": "Dette mnemoniske systemet er basert på at konsonantlyder erstattes med siffer. Med denne teknikken kan du representere tallsekvenser ved hjelp av ord. Siden det er mye lettere å huske ord enn tall, kan dette systemet brukes til å huske tallsekvenser, for eksempel telefonnumre eller årstall. For det tallet du vil huske, finner du tilsvarende ord som du gjør om til en fengende historie. Den oppdiktede historien bør være svært uvanlig, slik at den fester seg.",
+    "norwegian_adaptation": "Norsk tilpasning",
+    "norwegian_adaptation_description": "For dette programmet har det mnemoniske hovedsystemet blitt endret for å passe bedre norsk fonetikk. \nSpesielt er siffer 6 tilpasset bare å matche / ʃ / og / tʃ / lyder, som i norsk er representert ved kombinasjoner som SJ, SKJ, KJ og TJ.",
+    "norwegian_mapping_table": "Norsk mapping-tabell",
+    "notes": "Merknader",
+    "original_mapping": "Original mapping-tabell på engelsk",
+    "speach_sounds": "Tale lyder (IPA)",
+    "title": "Hjelp"
+  },
   "settings": {
     "language": "Språk",
     "theme": "Tema",
@@ -7,6 +38,5 @@
     "theme_light": "Lys",
     "title": "Innstillinger"
   },
-  "title": "Minneord konverterer",
-  "welcome_to": "Velkommen til"
+  "title": "Minneord konverterer"
 }

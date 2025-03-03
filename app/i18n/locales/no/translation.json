@@ -1,9 +1,10 @@
 {
   "convert": {
     "convert_words_to_digits": "Konverter ord til sifre",
+    "default": "standardverdi",
     "enter_number": "Angi nummer",
     "enter_number_description": "Skriv inn et nummer for å finne norske ord som kan hjelpe deg med å huske det. For eksempel: \"53\" kan være \"LAM\" (l = 5, m = 3).",
-    "enter_words": "Skriv inn ord (er)",
+    "enter_words": "Skriv inn ord",
     "enter_words_description": "Skriv inn norske ord for å se deres sifferrepresentasjoner. For eksempel: \"LAM\" blir \"53\" (l = 5, m = 3).",
     "finding_words": "Finner ord ...",
     "for_more_info": "For det komplette norske og originale engelsk mapping-tabellen se",

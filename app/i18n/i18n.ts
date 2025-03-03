@@ -6,8 +6,8 @@ import enTranslation from "./locales/en/translation.json";
 import noTranslation from "./locales/no/translation.json";
 
 export const translatedLanguages = [
-  { code: "no", label: "Norsk", translation: noTranslation },
-  { code: "en", label: "English", translation: enTranslation }, // the fallback language is the last in the list
+  { code: "en", label: "English", translation: enTranslation },
+  { code: "no", label: "Norsk", translation: noTranslation }, // the fallback language is the last in the list
 ];
 
 export default {

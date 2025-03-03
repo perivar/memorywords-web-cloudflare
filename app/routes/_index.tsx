@@ -12,6 +12,8 @@ import { parseDigits, toMnemonic } from "~/utils/mnemonic";
 import { FindWords } from "~/utils/wordFinder";
 import { useTranslation } from "react-i18next";
 
+import { MnemonicVisualizer } from "../components/MnemonicVisualizer";
+
 export async function loader({ request }: LoaderFunctionArgs) {
   const t = await i18next.getFixedT(request);
   return json({ title: t("title"), description: t("description") });
@@ -29,7 +31,13 @@ export default function Index() {
 
   const [digits, setDigits] = useState("");
   const [words, setWords] = useState("");
-  const [mnemonicResult, setMnemonicResult] = useState("");
+  const [mnemonicResults, setMnemonicResults] = useState<
+    Array<{
+      word: string;
+      digits: string;
+      mnemonic: string;
+    }>
+  >([]);
   const [wordGroups, setWordGroups] = useState<DigitsWords[]>([]);
   const [dictionary, setDictionary] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -97,10 +105,10 @@ export default function Index() {
     const results = wordList.map(word => {
       const foundDigits = parseDigits(word);
       const mnemonic = toMnemonic(word);
-      return `${word}\n${foundDigits}\n${mnemonic}`;
+      return { word, digits: foundDigits, mnemonic };
     });
 
-    setMnemonicResult(results.join("\n\n"));
+    setMnemonicResults(results);
   };
 
   if (error) {
@@ -163,7 +171,7 @@ export default function Index() {
                     value={digits}
                     onChange={e => setDigits(e.target.value)}
                     className="w-full rounded-md border px-3 py-2"
-                    placeholder={`${t("convert.enter_number")} (default: ${DEFAULT_DIGITS})`}
+                    placeholder={`${t("convert.enter_number")} (${t("convert.default")}: ${DEFAULT_DIGITS})`}
                   />
                 </div>
                 <Button
@@ -232,7 +240,7 @@ export default function Index() {
                     value={words}
                     onChange={e => setWords(e.target.value)}
                     className="w-full rounded-md border px-3 py-2"
-                    placeholder={`${t("convert.enter_words")} (default: ${DEFAULT_WORDS})`}
+                    placeholder={`${t("convert.enter_words")} (${t("convert.default")}: ${DEFAULT_WORDS})`}
                   />
                 </div>
                 <Button
@@ -242,14 +250,22 @@ export default function Index() {
                 </Button>
               </form>
 
-              {mnemonicResult && (
-                <div className="mt-6 rounded-md p-4">
-                  <h3 className="mb-2 text-lg font-medium">
-                    {t("convert.result")}
-                  </h3>
-                  <pre className="whitespace-pre font-mono text-sm">
-                    {mnemonicResult}
-                  </pre>
+              {mnemonicResults.length > 0 && (
+                <div className="mt-6 space-y-4">
+                  <h3 className="text-lg font-medium">{t("convert.result")}</h3>
+                  {mnemonicResults.map((result, index) => (
+                    <div key={index} className="rounded-md border p-4">
+                      <div className="mb-2 flex flex-row items-center">
+                        <div className="text-muted-foreground">
+                          {result.word} :
+                        </div>
+                        <div className="ml-2 text-sm font-medium tracking-widest">
+                          {result.digits}
+                        </div>
+                      </div>
+                      <MnemonicVisualizer mnemonic={result.mnemonic} />
+                    </div>
+                  ))}
                 </div>
               )}
             </div>

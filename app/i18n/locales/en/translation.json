@@ -1,6 +1,7 @@
 {
   "convert": {
     "convert_words_to_digits": "Convert Words to Digits",
+    "default": "default",
     "enter_number": "Enter Number",
     "enter_number_description": "Enter a number to find Norwegian words that can help you remember it. For example: \"53\" can be \"LAM\" (L=5, M=3).",
     "enter_words": "Enter Word(s)",

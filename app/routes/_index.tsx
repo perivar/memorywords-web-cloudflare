@@ -203,12 +203,17 @@ export default function Index() {
                         {t("convert.found_digits")} {group.Digits.join(",")}:
                       </h3>
                       <div className="pl-4">
-                        <div className="columns-3 gap-4">
+                        <div className="columns-3 items-start gap-4">
                           {group.WordCandidates.map((word, wordIndex) => (
+                            // <div
+                            //   key={wordIndex}
+                            //   className="break-inside-avoid text-sm">
+                            //   {word}
+                            // </div>
                             <div
                               key={wordIndex}
-                              className="break-inside-avoid text-sm">
-                              {word}
+                              className="break-inside-avoid pb-3">
+                              <MnemonicVisualizer mnemonic={toMnemonic(word)} />
                             </div>
                           ))}
                         </div>

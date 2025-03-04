@@ -24,7 +24,7 @@
     "example_description": "For example: The number \"53138552\" becomes",
     "how_it_works": "How does the Major System work?",
     "how_it_works_description": "This mnemonic system is based on the substitution of consonant sounds with digits. With this technique you can represent numeric sequences using words. Since remembering words is far more easy than numbers, this system can be used to easily remember numerical sequences, like telephone numbers or year dates. For the number you want to remember you find corresponding words which you turn into a catchy story. The made up story should be very unusual so it sticks.",
-    "ignored_description": "Vowels (A, E, I, O, U, Y, Æ, Ø, Å) and some consonants (H, W, C) are             ignored, which allows for flexibility in creating words while             maintaining the number sequence.",
+    "ignored_description": "Vowels (A, E, I, O, U, Y, Æ, Ø, Å) and some consonants (H, J, W, C) are             ignored, which allows for flexibility in creating words while             maintaining the number sequence.",
     "ignored_letters": "Ignored letters",
     "norwegian_adaptation": "Norwegian adaptation",
     "norwegian_adaptation_description": "For this program, the Mnemonic Major System has been modified to better suit Norwegian phonetics. In particular, digit 6 has been adapted to only match the /ʃ/ and /tʃ/ sounds, which in Norwegian are represented by combinations like sj, skj, kj, and tj.",

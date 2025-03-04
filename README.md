@@ -49,7 +49,7 @@ The Norwegian adaptation:
 | 8     | /f/, /v/            | F som i Fisk, V som i Visk                                  | Jeg assosierer V med V8-motor. F lyder som V når den uttales. F ligner på 8                    |
 | 9     | /p/, /b/            | P som i Pil, B som i Bil                                    | 9 rotert 180 grader ser ut som b. 9 speilvendt ser ut som P. P og B lyder likt når de uttales. |
 
-Vowels (A, E, I, O, U, Y, Æ, Ø, Å) and some consonants (H, W, C) are ignored, which allows for flexibility in creating words while maintaining the number sequence.
+Vowels (A, E, I, O, U, Y, Æ, Ø, Å) and some consonants (H, J, W, C) are ignored, which allows for flexibility in creating words while maintaining the number sequence.
 
 ### Example
 

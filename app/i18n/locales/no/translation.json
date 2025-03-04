@@ -24,7 +24,7 @@
     "example_description": "For eksempel: nummeret \"53138552\" blir",
     "how_it_works": "Hvordan fungerer det Mnemoniske Store Systemet?",
     "how_it_works_description": "Dette mnemoniske systemet er basert på at konsonantlyder erstattes med siffer. Med denne teknikken kan du representere tallsekvenser ved hjelp av ord. Siden det er mye lettere å huske ord enn tall, kan dette systemet brukes til å huske tallsekvenser, for eksempel telefonnumre eller årstall. For det tallet du vil huske, finner du tilsvarende ord som du gjør om til en fengende historie. Den oppdiktede historien bør være svært uvanlig, slik at den fester seg.",
-    "ignored_description": "Vokaler (A, E, I, O, U, Y, Æ, Ø, Å) og noen konsonanter (H, W, C) blir ignorert, noe som gir mulighet for fleksibilitet i å lage ord mens du opprettholder tallsekvensen.",
+    "ignored_description": "Vokaler (A, E, I, O, U, Y, Æ, Ø, Å) og noen konsonanter (H, J, W, C) blir ignorert, noe som gir mulighet for fleksibilitet i å lage ord mens du opprettholder tallsekvensen.",
     "ignored_letters": "Ignorerte bokstaver",
     "norwegian_adaptation": "Norsk tilpasning",
     "norwegian_adaptation_description": "For dette programmet har det mnemoniske hovedsystemet blitt endret for å passe bedre norsk fonetikk. \nSpesielt er siffer 6 tilpasset bare å matche / ʃ / og / tʃ / lyder, som i norsk er representert ved kombinasjoner som SJ, SKJ, KJ og TJ.",

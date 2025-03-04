@@ -80,16 +80,22 @@ export default function Index() {
   const handleDigitSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     // Use default digits if none are entered
-    const digitsToUse = digits.trim() || DEFAULT_DIGITS;
-    const digitArray = digitsToUse.split("").map(Number);
+    const digitsToUse = digits.replace(/[^\d\s]/g, "").trim() || DEFAULT_DIGITS;
+    const parts = digitsToUse.split(/\s+/).filter(part => part.length > 0);
 
     setIsProcessing(true);
-    setWordGroups([]); // Clear previous results
+    setWordGroups([]);
 
     try {
-      await FindWords(dictionary, digitArray, foundWords => {
-        setWordGroups(prev => [...prev, foundWords]);
-      });
+      for (const part of parts) {
+        const digitArray = part.split("").map(Number);
+        if (digitArray.some(d => isNaN(d))) {
+          throw new Error(`Invalid digit sequence: ${part}`);
+        }
+        await FindWords(dictionary, digitArray, foundWords => {
+          setWordGroups(prev => [...prev, foundWords]);
+        });
+      }
     } catch (err) {
       setError(err instanceof Error ? err.message : "Error processing words");
     } finally {

@@ -171,7 +171,7 @@ export default function Index() {
                     value={digits}
                     onChange={e => setDigits(e.target.value)}
                     className="w-full rounded-md border px-3 py-2"
-                    placeholder={`${t("convert.enter_number")} (${t("convert.default")}: ${DEFAULT_DIGITS})`}
+                    placeholder={`${t("convert.default")}: ${DEFAULT_DIGITS}`}
                   />
                 </div>
                 <Button
@@ -200,10 +200,10 @@ export default function Index() {
                   {wordGroups.map((group, groupIndex) => (
                     <div key={groupIndex} className="rounded-md p-4">
                       <h3 className="mb-3 text-lg font-medium">
-                        {t("convert.found_digits")} {group.Digits.join(",")}:
+                        {t("convert.found_digits")} : {group.Digits.join(" ")}
                       </h3>
                       <div className="pl-4">
-                        <div className="columns-3 items-start gap-4">
+                        <div className="columns-1 items-start gap-4 sm:columns-2 md:columns-3">
                           {group.WordCandidates.map((word, wordIndex) => (
                             // <div
                             //   key={wordIndex}
@@ -212,7 +212,7 @@ export default function Index() {
                             // </div>
                             <div
                               key={wordIndex}
-                              className="break-inside-avoid pb-3">
+                              className="break-inside-avoid pb-2">
                               <MnemonicVisualizer mnemonic={toMnemonic(word)} />
                             </div>
                           ))}
@@ -245,7 +245,7 @@ export default function Index() {
                     value={words}
                     onChange={e => setWords(e.target.value)}
                     className="w-full rounded-md border px-3 py-2"
-                    placeholder={`${t("convert.enter_words")} (${t("convert.default")}: ${DEFAULT_WORDS})`}
+                    placeholder={`${t("convert.default")}: ${DEFAULT_WORDS}`}
                   />
                 </div>
                 <Button

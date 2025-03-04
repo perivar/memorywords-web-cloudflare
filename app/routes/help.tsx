@@ -25,7 +25,7 @@ export default function Help() {
           <p className="mb-4">
             {t("help.example_description")}
             <br />
-            {"LAM"} (5=L, 3=M) - {"DUM"} (1=D, 3=M) - {"FLY"} (8=F, 5=L) -{""}
+            {"LAM"} (5=L, 3=M) - {"DUM"} (1=D, 3=M) - {"FLY"} (8=F, 5=L) -{" "}
             {"LYN"} (5=L, 2=N)
           </p>
 
@@ -217,6 +217,11 @@ export default function Help() {
               ))}
             </tbody>
           </table>
+
+          <h3 className="mt-8 text-lg font-medium">
+            {t("help.ignored_letters")}
+          </h3>
+          <p className="mb-4">{t("help.ignored_description")}</p>
         </div>
       </div>
     </div>

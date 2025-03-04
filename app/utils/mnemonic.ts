@@ -1,3 +1,5 @@
+import type { Part } from "../components/MnemonicVisualizer";
+
 // Mapping of digits to phonemes (consonant sounds)
 export const digitToPhonemes: { [key: string]: string[] } = {
   "0": ["s", "z"],
@@ -82,13 +84,12 @@ export function parseDigits(word: string): string {
   return digits.join("");
 }
 
-export function toMnemonic(word: string): string {
-  if (!word) return "";
+export function toMnemonic(word: string): Part[] {
+  if (!word) return [];
 
   const normalizedWord = word.toLowerCase();
-  const parts: string[] = [];
-  let lastDigit: string | null = null;
-  let lastPhoneme: string | null = null;
+  const parts: Part[] = [];
+  let lastPhonemePart: Part | null = null;
   let hasVowelOrSpaceSinceLastDigit = false;
 
   let match: RegExpExecArray | null;
@@ -99,7 +100,10 @@ export function toMnemonic(word: string): string {
       hasVowelOrSpaceSinceLastDigit = true;
       const vowelGroup = match[2];
       if (vowelGroup.trim()) {
-        parts.push(`[${vowelGroup}]`);
+        parts.push({
+          type: "vowel",
+          value: vowelGroup,
+        });
       }
       continue;
     }
@@ -109,20 +113,22 @@ export function toMnemonic(word: string): string {
       const currentDigit = phonemeToDigit[phoneme];
       // Add the phoneme if it's different from the last one OR if we've seen vowels
       if (
-        !lastDigit ||
-        lastDigit !== currentDigit ||
-        hasVowelOrSpaceSinceLastDigit
+        lastPhonemePart?.digit === currentDigit &&
+        !hasVowelOrSpaceSinceLastDigit
       ) {
-        parts.push(`${phoneme}(${currentDigit})`);
-        lastDigit = currentDigit;
-        lastPhoneme = phoneme;
-        hasVowelOrSpaceSinceLastDigit = false;
+        lastPhonemePart.value += phoneme;
       } else {
-        // Replace the last part to show combined consonants
-        parts[parts.length - 1] = `${lastPhoneme}${phoneme}(${currentDigit})`;
+        const newPart: Part = {
+          type: "phoneme",
+          value: phoneme,
+          digit: currentDigit,
+        };
+        parts.push(newPart);
+        lastPhonemePart = newPart;
       }
+      hasVowelOrSpaceSinceLastDigit = false;
     }
   }
 
-  return parts.join(" ");
+  return parts;
 }

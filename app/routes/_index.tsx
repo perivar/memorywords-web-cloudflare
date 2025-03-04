@@ -12,7 +12,7 @@ import { parseDigits, toMnemonic } from "~/utils/mnemonic";
 import { FindWords } from "~/utils/wordFinder";
 import { useTranslation } from "react-i18next";
 
-import { MnemonicVisualizer } from "../components/MnemonicVisualizer";
+import { MnemonicVisualizer, Part } from "../components/MnemonicVisualizer";
 
 export async function loader({ request }: LoaderFunctionArgs) {
   const t = await i18next.getFixedT(request);
@@ -35,7 +35,7 @@ export default function Index() {
     Array<{
       word: string;
       digits: string;
-      mnemonic: string;
+      mnemonic: Part[];
     }>
   >([]);
   const [wordGroups, setWordGroups] = useState<DigitsWords[]>([]);
@@ -131,7 +131,7 @@ export default function Index() {
           <p className="mb-4">
             {t("help.example_description")}
             <br />
-            {"LAM"} (5=L, 3=M) - {"DUM"} (1=D, 3=M) - {"FLY"} (8=F, 5=L) -{""}
+            {"LAM"} (5=L, 3=M) - {"DUM"} (1=D, 3=M) - {"FLY"} (8=F, 5=L) -{" "}
             {"LYN"} (5=L, 2=N)
           </p>
           <p>

@@ -103,7 +103,7 @@ function InnerLayout({
   const { i18n } = useTranslation();
 
   return (
-    <html lang={locale ?? "no"} dir={i18n.dir()} className={clsx(theme)}>
+    <html lang={locale ?? "en"} dir={i18n.dir()} className={clsx(theme)}>
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />

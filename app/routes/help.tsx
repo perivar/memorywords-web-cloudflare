@@ -22,7 +22,7 @@ export default function Help() {
           <p className="mb-4">{t("help.norwegian_adaptation_description")}</p>
 
           <h2 className="mb-2 text-xl font-semibold">{t("help.example")}</h2>
-          <p className="mb-4 leading-relaxed text-gray-700">
+          <p className="mb-4">
             {t("help.example_description")}
             <br />
             <span className="font-mono">

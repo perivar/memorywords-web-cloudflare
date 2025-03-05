@@ -35,6 +35,16 @@
     "speach_sounds": "Speech Sounds (IPA)",
     "title": "Help"
   },
+  "listbox": {
+    "copy_list_to_clipboard": "Copy list to clipboard",
+    "empty_list": "Empty list",
+    "error": "Error",
+    "error_description": "Failed to copy list",
+    "selected_words": "Selected Words",
+    "selected_words_description": "Make a list to more easily remember words by clicking on words",
+    "success": "Success",
+    "success_description": "List copied to clipboard!"
+  },
   "settings": {
     "language": "Language",
     "theme": "Theme",

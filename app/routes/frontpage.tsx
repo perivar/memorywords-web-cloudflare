@@ -1,6 +1,7 @@
 // app/routes/frontpage.tsx
 
 import { useEffect, useState } from "react";
+import ListBox from "@/components/ListBox";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -43,6 +44,11 @@ export default function Index() {
   const [isLoading, setIsLoading] = useState(true);
   const [isProcessing, setIsProcessing] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [selectedWords, setSelectedWords] = useState<string[]>([]);
+
+  const handleWordClick = (word: string) => {
+    setSelectedWords(prevWords => [...prevWords, word]);
+  };
 
   const DEFAULT_DIGITS = "31415926535897932384"; // First 20 digits of π
   const DEFAULT_WORDS = "motorhotell penkjole milf byggeboomen omveier";
@@ -130,11 +136,15 @@ export default function Index() {
 
   return (
     <div className="min-h-screen px-4 py-12 sm:px-6 lg:px-8">
+      <ListBox
+        selectedWords={selectedWords}
+        setSelectedWords={setSelectedWords}
+      />
       <div className="mx-auto max-w-4xl">
         <h1 className="mb-4 text-center text-3xl font-bold">{t("title")}</h1>
         <div className="mb-8 rounded-lg p-6 shadow">
           <p className="mb-4">{t("description")}</p>
-          <p className="mb-4 leading-relaxed text-gray-700">
+          <p className="mb-4">
             {t("help.example_description")}
             <br />
             <span className="font-mono">
@@ -223,7 +233,10 @@ export default function Index() {
                             <div
                               key={wordIndex}
                               className="break-inside-avoid pb-2">
-                              <MnemonicVisualizer mnemonic={toMnemonic(word)} />
+                              <MnemonicVisualizer
+                                mnemonic={toMnemonic(word)}
+                                onClick={() => handleWordClick(word)}
+                              />
                             </div>
                           ))}
                         </div>

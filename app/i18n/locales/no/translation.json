@@ -35,6 +35,16 @@
     "speach_sounds": "Tale lyder (IPA)",
     "title": "Hjelp"
   },
+  "listbox": {
+    "copy_list_to_clipboard": "Kopier liste til utklippstavlen",
+    "empty_list": "Tøm liste",
+    "error": "Feil",
+    "error_description": "Kunne ikke kopiere listen",
+    "selected_words": "Utvalgte ord",
+    "selected_words_description": "Lag en liste for lettere å huske ord ved å klikke på ord",
+    "success": "Suksess",
+    "success_description": "Liste kopiert til utklippstavlen!"
+  },
   "settings": {
     "language": "Språk",
     "theme": "Tema",

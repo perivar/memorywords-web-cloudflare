@@ -6,11 +6,15 @@ export interface Part {
 
 interface MnemonicVisualizerProps {
   mnemonic: Part[];
+  onClick?: () => void;
 }
 
-export function MnemonicVisualizer({ mnemonic }: MnemonicVisualizerProps) {
+export function MnemonicVisualizer({
+  mnemonic,
+  onClick,
+}: MnemonicVisualizerProps) {
   return (
-    <div className="flex w-full gap-1">
+    <button onClick={onClick} className="flex w-full gap-1">
       {mnemonic.map((part, index) => {
         if (part.type === "phoneme") {
           return (
@@ -29,6 +33,6 @@ export function MnemonicVisualizer({ mnemonic }: MnemonicVisualizerProps) {
           );
         }
       })}
-    </div>
+    </button>
   );
 }

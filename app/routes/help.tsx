@@ -22,11 +22,15 @@ export default function Help() {
           <p className="mb-4">{t("help.norwegian_adaptation_description")}</p>
 
           <h2 className="mb-2 text-xl font-semibold">{t("help.example")}</h2>
-          <p className="mb-4">
+          <p className="mb-4 leading-relaxed text-gray-700">
             {t("help.example_description")}
             <br />
-            {"LAM"} (5=L, 3=M) - {"DUM"} (1=D, 3=M) - {"FLY"} (8=F, 5=L) -{" "}
-            {"LYN"} (5=L, 2=N)
+            <span className="font-mono">
+              <span className="text-primary">LAM</span> (5=L, 3=M) -{" "}
+              <span className="text-primary">DUM</span> (1=D, 3=M) -{" "}
+              <span className="text-primary">FLY</span> (8=F, 5=L) -{" "}
+              <span className="text-primary">LYN</span> (5=L, 2=N)
+            </span>
           </p>
 
           <h3 className="mb-2 mt-10 text-lg font-medium">

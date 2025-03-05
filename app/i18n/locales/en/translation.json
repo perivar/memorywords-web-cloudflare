@@ -14,6 +14,7 @@
     "processing": "Processing...",
     "result": "Result",
     "show_words": "Show Words",
+    "title": "Frontpage",
     "words_for_number": "Words for Number"
   },
   "description": "The Mnemonic Major System converts numbers to consonant sounds that can form memorable words. This Norwegian adaptation helps remember long numbers like π (3.1415926535897932384) through word associations.",

@@ -291,7 +291,10 @@ export default function Index() {
                           {result.digits}
                         </div>
                       </div>
-                      <MnemonicVisualizer mnemonic={result.mnemonic} />
+                      <MnemonicVisualizer
+                        mnemonic={result.mnemonic}
+                        onClick={() => handleWordClick(result.word)}
+                      />
                     </div>
                   ))}
                 </div>

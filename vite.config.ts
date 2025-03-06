@@ -23,6 +23,22 @@ export default defineConfig({
         v3_lazyRouteDiscovery: true,
       },
     }),
+    // Custom plugin resolves warning - Failed to resolve "remix:manifest" from /Users/... An id should be written. Did you pass a URL?
+    {
+      name: "remix-manifest-resolver",
+      resolveId(id) {
+        if (id === "remix:manifest") {
+          return id;
+        }
+      },
+      // Optional: warning is suppressed without this hook
+      // Provides an empty object for 'remix:manifest' if HMR triggers, but HMR remains non-functional
+      load(id) {
+        if (id === "remix:manifest") {
+          return "export default {}";
+        }
+      },
+    },
     tsconfigPaths(),
   ],
 });

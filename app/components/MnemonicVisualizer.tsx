@@ -16,7 +16,7 @@ export function MnemonicVisualizer({
   return (
     <button
       onClick={onClick}
-      className="flex cursor-pointer flex-wrap gap-1 hover:border-b hover:border-current">
+      className={`flex flex-wrap gap-1 ${onClick ? "cursor-pointer hover:border-b hover:border-current" : "pointer-events-none"}`}>
       {mnemonic.map((part, index) => {
         if (part.type === "phoneme") {
           return (
@@ -27,10 +27,9 @@ export function MnemonicVisualizer({
           );
         } else {
           return (
-            <div key={index} className="flex">
-              <span className="self-end text-muted-foreground">
-                {part.value}
-              </span>
+            <div key={index} className="flex flex-col items-center">
+              <span className="text-sm font-thin">&#8203;</span>
+              <span className="text-muted-foreground">{part.value}</span>
             </div>
           );
         }

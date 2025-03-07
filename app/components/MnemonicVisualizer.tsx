@@ -16,7 +16,7 @@ export function MnemonicVisualizer({
   return (
     <button
       onClick={onClick}
-      className={`flex flex-wrap gap-1 ${onClick ? "cursor-pointer hover:border-b hover:border-current" : "pointer-events-none"}`}>
+      className={`flex flex-wrap gap-1 border-b border-transparent ${onClick ? "cursor-pointer hover:border-current" : "pointer-events-none"}`}>
       {mnemonic.map((part, index) => {
         if (part.type === "phoneme") {
           return (

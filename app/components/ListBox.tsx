@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/collapsible";
 import { useToast } from "@/components/ui/use-toast";
 import { toMnemonic } from "~/utils/mnemonic";
-import { ChevronsUpDown, Clipboard, Info, Trash2 } from "lucide-react";
+import { ChevronsUpDown, Clipboard, Info, Trash2, X } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 import { MnemonicVisualizer } from "./MnemonicVisualizer";
@@ -34,7 +34,7 @@ const ListBox: React.FC<ListBoxProps> = ({
         </div>
       </CollapsibleTrigger>
       <CollapsibleContent className="max-h-[80vh] w-full overflow-y-auto p-2 md:max-h-[70vh]">
-        <div className="mb-2 flex items-center justify-between">
+        <div className="mb-2 flex items-center justify-end">
           {selectedWords.length > 0 && (
             <div className="flex items-center gap-2">
               <button
@@ -62,9 +62,9 @@ const ListBox: React.FC<ListBoxProps> = ({
               </button>
               <button
                 onClick={() => setSelectedWords([])}
-                className="p-1 text-foreground/80 transition-colors hover:text-foreground"
+                className="p-0.5 text-foreground/80 transition-colors hover:text-foreground"
                 aria-label={t("listbox.empty_list")}>
-                <Trash2 size={18} />
+                <Trash2 size={14} />
               </button>
             </div>
           )}
@@ -72,8 +72,21 @@ const ListBox: React.FC<ListBoxProps> = ({
         {selectedWords.length > 0 ? (
           <ul className="space-y-2">
             {selectedWords.map((word, index) => (
-              <li key={index} className="text-sm text-foreground">
+              <li
+                key={index}
+                className="flex items-center justify-between gap-5 text-sm text-foreground">
                 <MnemonicVisualizer mnemonic={toMnemonic(word)} />
+                <button
+                  onClick={() => {
+                    const newWords = selectedWords.filter(
+                      (_, i) => i !== index
+                    );
+                    setSelectedWords(newWords);
+                  }}
+                  className="p-1 text-foreground/80 transition-colors hover:text-foreground"
+                  aria-label={t("listbox.remove_word")}>
+                  <X size={14} />
+                </button>
               </li>
             ))}
           </ul>

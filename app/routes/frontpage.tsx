@@ -180,6 +180,28 @@ export default function Index() {
               </p>
               <form onSubmit={handleDigitSubmit} className="mb-6">
                 <div className="mb-4">
+                  <div className="mb-2 flex space-x-2">
+                    <Button
+                      type="button"
+                      onClick={() =>
+                        setDigits(
+                          "3.14159265358979323846264338327950288419716939937510"
+                        )
+                      }
+                      variant="outline">
+                      Π
+                    </Button>
+                    <Button
+                      type="button"
+                      onClick={() =>
+                        setDigits(
+                          "2.71828182845904523536028747135266249775724709369995"
+                        )
+                      }
+                      variant="outline">
+                      e
+                    </Button>
+                  </div>
                   <Label
                     htmlFor="digits"
                     className="mb-1 block text-sm font-medium">

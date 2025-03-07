@@ -43,7 +43,8 @@
     "selected_words": "Utvalgte ord",
     "selected_words_description": "Lag en liste for lettere å huske ord ved å klikke på ord",
     "success": "Suksess",
-    "success_description": "Liste kopiert til utklippstavlen!"
+    "success_description": "Liste kopiert til utklippstavlen!",
+    "remove_word": "Fjern ordet"
   },
   "settings": {
     "language": "Språk",

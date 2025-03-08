@@ -4,27 +4,37 @@ const vowels = "[aeiouyæøåhjwc]"; // vowels and non-used characters (hjwc)
 const zeroOrMoreVowels = `${vowels}*`;
 const oneOrMoreVowels = `${vowels}+`;
 
-function getDigitRegexp(singleDigit: number): string | null {
+export function getDigitRegexp(singleDigit: number): string | null {
   switch (singleDigit) {
     case 0:
-      return "[sz]";
+      // s not followed by j or kj (matches s in isolation, not part of sj or skj)
+      return "s(?!j|kj)";
     case 1:
-      return "[td]";
+      // t or d, not followed by j
+      return "[td](?!j)";
     case 2:
+      // n anywhere in word
       return "n";
     case 3:
+      // m anywhere in word
       return "m";
     case 4:
+      // r anywhere in word
       return "r";
     case 5:
+      // l anywhere in word
       return "l";
     case 6:
+      // Matches sj, skj, kj, or tj combinations
       return "((s(k)?j)|(kj)|(tj))";
     case 7:
-      return "[kg]";
+      // k or g, not followed by j
+      return "[kg](?!j)";
     case 8:
+      // f or v anywhere in word
       return "[fv]";
     case 9:
+      // p or b anywhere in word
       return "[pb]";
     default:
       return null;

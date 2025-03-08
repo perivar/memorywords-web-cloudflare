@@ -14,7 +14,11 @@
     "processing": "Processing...",
     "result": "Result",
     "show_words": "Show Words",
+    "split": "Split",
+    "split_length": "Split length",
     "title": "Frontpage",
+    "tools": "Tools",
+    "tools_description": "Tools to generate constants like π and split number sequences to ensure the resulting words contain a specific number of digits.",
     "words_for_number": "Words for Number"
   },
   "description": "The Mnemonic Major System converts numbers to consonant sounds that can form memorable words. This Norwegian adaptation helps remember long numbers like π (3.1415926535897932384) through word associations.",
@@ -40,11 +44,11 @@
     "empty_list": "Empty list",
     "error": "Error",
     "error_description": "Failed to copy list",
+    "remove_word": "Remove word",
     "selected_words": "Selected Words",
     "selected_words_description": "Make a list to more easily remember words by clicking on words",
     "success": "Success",
-    "success_description": "List copied to clipboard!",
-    "remove_word": "Remove word"
+    "success_description": "List copied to clipboard!"
   },
   "settings": {
     "language": "Language",

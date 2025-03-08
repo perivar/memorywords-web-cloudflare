@@ -10,7 +10,7 @@ export default function Help() {
         <h1 className="mb-4 text-center text-3xl font-bold">
           {t("help.title")}
         </h1>
-        <div className="mb-8 rounded-lg p-6 shadow">
+        <div className="mb-8 rounded-lg border border-border p-6 shadow-lg">
           <h2 className="mb-2 text-xl font-semibold">
             {t("help.how_it_works")}
           </h2>

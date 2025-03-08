@@ -14,7 +14,11 @@
     "processing": "Behandler ...",
     "result": "Resultat",
     "show_words": "Vis ord",
+    "split": "Dele",
+    "split_length": "Dele lengde",
     "title": "Forside",
+    "tools": "Verktøy",
+    "tools_description": "Verktøy for å generere konstanter som π og dele tallrekker for å sikre at de resulterende ordene inneholder et spesifikt antall sifre.",
     "words_for_number": "Ord for nummer"
   },
   "description": "Det Mnemoniske Store Systemet konverterer tall til konsonant-lyder som kan danne ord som er lett å huske. Denne norske tilpasningen er med på å huske lange tall som π (3.1415926535897932384) gjennom assosiasjoner til ord.",
@@ -40,11 +44,11 @@
     "empty_list": "Tøm liste",
     "error": "Feil",
     "error_description": "Kunne ikke kopiere listen",
+    "remove_word": "Fjern ordet",
     "selected_words": "Utvalgte ord",
     "selected_words_description": "Lag en liste for lettere å huske ord ved å klikke på ord",
     "success": "Suksess",
-    "success_description": "Liste kopiert til utklippstavlen!",
-    "remove_word": "Fjern ordet"
+    "success_description": "Liste kopiert til utklippstavlen!"
   },
   "settings": {
     "language": "Språk",

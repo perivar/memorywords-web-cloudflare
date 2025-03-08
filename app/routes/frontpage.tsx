@@ -1,10 +1,18 @@
 // app/routes/frontpage.tsx
 
 import { useEffect, useState } from "react";
+import ClearableInput from "@/components/ClearableInput";
 import ListBox from "@/components/ListBox";
+import { MnemonicVisualizer, Part } from "@/components/MnemonicVisualizer";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import type { LoaderFunctionArgs, MetaFunction } from "@remix-run/cloudflare";
 import { json, Link } from "@remix-run/react";
 import i18next from "~/i18n/i18n.server";
@@ -12,8 +20,6 @@ import { DigitsWords } from "~/utils/DigitsWords";
 import { parseDigits, toMnemonic } from "~/utils/mnemonic";
 import { FindWords } from "~/utils/wordFinder";
 import { useTranslation } from "react-i18next";
-
-import { MnemonicVisualizer, Part } from "../components/MnemonicVisualizer";
 
 export async function loader({ request }: LoaderFunctionArgs) {
   const t = await i18next.getFixedT(request);
@@ -31,6 +37,7 @@ export default function Index() {
   const { t } = useTranslation();
 
   const [digits, setDigits] = useState("");
+  const [splitLength, setSplitLength] = useState("3");
   const [words, setWords] = useState("");
   const [mnemonicResults, setMnemonicResults] = useState<
     Array<{
@@ -83,6 +90,18 @@ export default function Index() {
     loadDictionary();
   }, []);
 
+  const handleSplitDigits = () => {
+    if (!digits) return; // Handle empty input
+
+    const cleanedDigits = digits.replace(/[^0-9]/g, "");
+    if (!cleanedDigits) return; // Handle no numbers
+
+    const length = parseInt(splitLength);
+    const splitResult =
+      cleanedDigits.match(new RegExp(`.{1,${length}}`, "g")) || [];
+    setDigits(splitResult.join(" "));
+  };
+
   const handleDigitSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     // Use default digits if none are entered
@@ -126,7 +145,7 @@ export default function Index() {
   if (error) {
     return (
       <div className="flex min-h-screen items-center justify-center">
-        <div className="rounded-lg p-6 shadow">
+        <div className="rounded-lg border border-border p-6 shadow-lg">
           <h2 className="mb-2 text-xl font-semibold text-red-500">Error</h2>
           <p className="">{error}</p>
         </div>
@@ -142,7 +161,7 @@ export default function Index() {
       />
       <div className="mx-auto max-w-4xl">
         <h1 className="mb-4 text-center text-3xl font-bold">{t("title")}</h1>
-        <div className="mb-8 rounded-lg p-6 shadow">
+        <div className="mb-8 rounded-lg border border-border p-6 shadow-lg">
           <p className="mb-4">{t("description")}</p>
           <p className="mb-4">
             {t("help.example_description")}
@@ -171,7 +190,7 @@ export default function Index() {
         ) : (
           <>
             {/* Words for Number Section */}
-            <div className="mb-6 rounded-lg p-6 shadow">
+            <div className="mb-6 rounded-lg border border-border p-6 shadow-lg">
               <h2 className="mb-2 text-xl font-semibold">
                 {t("convert.words_for_number")}
               </h2>
@@ -180,38 +199,80 @@ export default function Index() {
               </p>
               <form onSubmit={handleDigitSubmit} className="mb-6">
                 <div className="mb-4">
-                  <div className="mb-2 flex space-x-2">
-                    <Button
-                      type="button"
-                      onClick={() =>
-                        setDigits(
-                          "3.14159265358979323846264338327950288419716939937510"
-                        )
-                      }
-                      variant="outline">
-                      Π
-                    </Button>
-                    <Button
-                      type="button"
-                      onClick={() =>
-                        setDigits(
-                          "2.71828182845904523536028747135266249775724709369995"
-                        )
-                      }
-                      variant="outline">
-                      e
-                    </Button>
+                  <Label className="mb-2 block text-sm font-medium">
+                    {t("convert.tools")}
+                  </Label>
+                  <span className="text-sm">
+                    {t("convert.tools_description")}
+                  </span>
+                  <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
+                    <div className="flex flex-wrap gap-2">
+                      <Button
+                        type="button"
+                        onClick={() =>
+                          setDigits(
+                            "3.14159265358979323846264338327950288419716939937510"
+                          )
+                        }
+                        variant="outline">
+                        Π
+                      </Button>
+                      <Button
+                        type="button"
+                        onClick={() =>
+                          setDigits(
+                            "2.71828182845904523536028747135266249775724709369995"
+                          )
+                        }
+                        variant="outline">
+                        e
+                      </Button>
+                    </div>
+                    <div className="flex items-center space-x-2 pb-5">
+                      <Label
+                        htmlFor="splitLength"
+                        className="text-sm font-medium">
+                        {t("convert.split_length")}:
+                      </Label>
+                      <Select
+                        value={splitLength}
+                        onValueChange={setSplitLength}>
+                        <SelectTrigger className="w-[70px]">
+                          <SelectValue placeholder="Select" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {Array.from({ length: 9 }, (_, i) => i + 2).map(
+                            length => (
+                              <SelectItem
+                                key={length}
+                                value={length.toString()}>
+                                {length}
+                              </SelectItem>
+                            )
+                          )}
+                        </SelectContent>
+                      </Select>
+                      <Button
+                        type="button"
+                        variant="outline"
+                        onClick={handleSplitDigits}>
+                        {t("convert.split")}
+                      </Button>
+                    </div>
                   </div>
                   <Label
                     htmlFor="digits"
                     className="mb-1 block text-sm font-medium">
                     {t("convert.enter_number")}
                   </Label>
-                  <Input
+                  <ClearableInput
                     type="text"
                     id="digits"
                     value={digits}
-                    onChange={e => setDigits(e.target.value)}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                      setDigits(e.target.value)
+                    }
+                    onClear={() => setDigits("")}
                     className="w-full rounded-md border px-3 py-2"
                     placeholder={`${t("convert.default")}: ${DEFAULT_DIGITS}`}
                   />
@@ -270,7 +331,7 @@ export default function Index() {
             </div>
 
             {/* Number for Words Section */}
-            <div className="rounded-lg p-6 shadow">
+            <div className="rounded-lg border border-border p-6 shadow-lg">
               <h2 className="mb-2 text-xl font-semibold">
                 {t("convert.number_for_words")}
               </h2>
@@ -284,11 +345,14 @@ export default function Index() {
                     className="mb-1 block text-sm font-medium">
                     {t("convert.enter_words")}
                   </Label>
-                  <Input
+                  <ClearableInput
                     type="text"
                     id="words"
                     value={words}
-                    onChange={e => setWords(e.target.value)}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                      setWords(e.target.value)
+                    }
+                    onClear={() => setWords("")}
                     className="w-full rounded-md border px-3 py-2"
                     placeholder={`${t("convert.default")}: ${DEFAULT_WORDS}`}
                   />

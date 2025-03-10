@@ -51,6 +51,8 @@
     "success_description": "List copied to clipboard!"
   },
   "settings": {
+    "include_wc": "Interpret w and c as letters to be ignored",
+    "include_wc_subtitle": "Include or exclude 'wc' as letters to be ignored when finding words",
     "language": "Language",
     "theme": "Theme",
     "theme_dark": "Dark",

@@ -14,16 +14,24 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import type { LoaderFunctionArgs, MetaFunction } from "@remix-run/cloudflare";
-import { json, Link } from "@remix-run/react";
+import { json, Link, useLoaderData } from "@remix-run/react";
 import i18next from "~/i18n/i18n.server";
 import { DigitsWords } from "~/utils/DigitsWords";
 import { parseDigits, toMnemonic } from "~/utils/mnemonic";
+import { wcCookie } from "~/utils/wcCookie.server";
 import { FindWords } from "~/utils/wordFinder";
 import { useTranslation } from "react-i18next";
 
 export async function loader({ request }: LoaderFunctionArgs) {
   const t = await i18next.getFixedT(request);
-  return json({ title: t("title"), description: t("description") });
+  const cookieHeader = request.headers.get("Cookie");
+  const includeWC = cookieHeader ? await wcCookie.parse(cookieHeader) : false;
+
+  return json({
+    title: t("title"),
+    description: t("description"),
+    includeWC,
+  });
 }
 
 export const meta: MetaFunction<typeof loader> = ({ data }) => {
@@ -35,6 +43,7 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
 
 export default function Index() {
   const { t } = useTranslation();
+  const data = useLoaderData<typeof loader>();
 
   const [digits, setDigits] = useState("");
   const [splitLength, setSplitLength] = useState("3");
@@ -117,7 +126,7 @@ export default function Index() {
         if (digitArray.some(d => isNaN(d))) {
           throw new Error(`Invalid digit sequence: ${part}`);
         }
-        await FindWords(dictionary, digitArray, foundWords => {
+        await FindWords(dictionary, digitArray, data.includeWC, foundWords => {
           setWordGroups(prev => [...prev, foundWords]);
         });
       }

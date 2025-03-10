@@ -12,19 +12,25 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { json, LoaderFunctionArgs, MetaFunction } from "@remix-run/cloudflare";
-import { useFetcher } from "@remix-run/react";
+import { useFetcher, useLoaderData } from "@remix-run/react";
 import { translatedLanguages } from "~/i18n/i18n";
 import i18next from "~/i18n/i18n.server";
 import { useRootLoaderData } from "~/root";
+import { wcCookie } from "~/utils/wcCookie.server";
 import { useTranslation } from "react-i18next";
 import { Theme, useTheme } from "remix-themes";
 
-export async function loader({ context, request }: LoaderFunctionArgs) {
+import { Switch } from "~/components/ui/switch";
+
+export async function loader({ request }: LoaderFunctionArgs) {
   const t = await i18next.getFixedT(request);
+  const cookieHeader = request.headers.get("Cookie");
+  const includeWC = cookieHeader ? await wcCookie.parse(cookieHeader) : false;
 
   return json({
     title: t("title"),
     description: t("description"),
+    includeWC,
   });
 }
 
@@ -37,6 +43,7 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
 
 export default function SettingsView() {
   const { t } = useTranslation();
+  const data = useLoaderData<typeof loader>();
 
   // get locale from root loader
   const rootLoaderData = useRootLoaderData();
@@ -95,6 +102,22 @@ export default function SettingsView() {
             </SelectContent>
           </Select>
         </fetcher.Form>
+      </ListItem>
+      <ListItem
+        title={t("settings.include_wc")}
+        subtitle={t("settings.include_wc_subtitle")}>
+        <Switch
+          id="wc-switch"
+          checked={!!data.includeWC}
+          onCheckedChange={checked => {
+            fetcher.submit(
+              {
+                includeWC: checked,
+              },
+              { method: "post", action: "/action/set-wc" }
+            );
+          }}
+        />
       </ListItem>
     </div>
   );

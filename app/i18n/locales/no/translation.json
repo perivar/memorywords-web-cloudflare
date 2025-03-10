@@ -51,6 +51,8 @@
     "success_description": "Liste kopiert til utklippstavlen!"
   },
   "settings": {
+    "include_wc": "Tolk w og c som bokstaver som skal ignoreres",
+    "include_wc_subtitle": "Inkludere eller ekskludere 'wc' som bokstaver som skal ignoreres når du finner ord",
     "language": "Språk",
     "theme": "Tema",
     "theme_dark": "Mørk",

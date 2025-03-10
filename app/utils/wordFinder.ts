@@ -1,9 +1,5 @@
 import { DigitsWords } from "./DigitsWords";
 
-const vowels = "[aeiouyæøåhjwc]"; // vowels and non-used characters (hjwc)
-const zeroOrMoreVowels = `${vowels}*`;
-const oneOrMoreVowels = `${vowels}+`;
-
 export function getDigitRegexp(singleDigit: number): string | null {
   switch (singleDigit) {
     case 0:
@@ -44,15 +40,23 @@ export function getDigitRegexp(singleDigit: number): string | null {
 // Cache for compiled regular expressions
 const regexCache: Map<string, RegExp> = new Map();
 
-function getRegexp(digits: number[]): RegExp {
-  // Use the array as string for cache key
-  const key = digits.join(",");
+function getRegexp(digits: number[], includeWC: boolean): RegExp {
+  // Use the digits array and the includeWC flag as a unique key in the cache
+  const key = digits.join(",") + `-${includeWC}`;
   if (regexCache.has(key)) {
     return regexCache.get(key)!;
   }
 
+  // Ignored characters: vowels and other non-used characters like hjwc
+  const baseIgnoredChars = "aeiouyæøåhj";
+  const ignoredChars = includeWC
+    ? `[${baseIgnoredChars}wc]`
+    : `[${baseIgnoredChars}]`;
+  const zeroOrMoreIgnoredChars = `${ignoredChars}*`;
+  const oneOrMoreIgnoredChars = `${ignoredChars}+`;
+
   let pattern = "^("; // start regexp and define first group
-  pattern += zeroOrMoreVowels; // zero or more vowels
+  pattern += zeroOrMoreIgnoredChars; // zero or more ignored chars
 
   // the first digits
   let backReferenceCount = 2;
@@ -68,14 +72,14 @@ function getRegexp(digits: number[]): RegExp {
 
     if (i + 1 < digits.length) {
       // check if the next number is the same consonant,
-      // if that is the case a vowel is mandatory, otherwise vowels are optional
+      // if that is the case a ignored char is mandatory, otherwise ignored chars are optional
       if (digits[i] === digits[i + 1]) {
-        pattern += oneOrMoreVowels; // one or more vowels
+        pattern += oneOrMoreIgnoredChars; // one or more ignored chars
       } else {
-        pattern += zeroOrMoreVowels; // zero or more vowels
+        pattern += zeroOrMoreIgnoredChars; // zero or more ignored chars
       }
     } else {
-      pattern += zeroOrMoreVowels;
+      pattern += zeroOrMoreIgnoredChars;
     }
   }
 
@@ -84,7 +88,7 @@ function getRegexp(digits: number[]): RegExp {
     // one or two consecutive consonants using backreference
     pattern += `(${numPattern})`;
     pattern += `\\${backReferenceCount}?`; // use backreference to group number
-    pattern += zeroOrMoreVowels; // zero or more vowels
+    pattern += zeroOrMoreIgnoredChars; // zero or more ignored chars
   }
 
   // end regexp and end group
@@ -112,9 +116,10 @@ function lookupWords(
   dictionary: string[],
   searchDigits: number[],
   noDigitsProcessed: { value: number },
+  includeWC: boolean,
   onProgress?: ProgressCallback
 ): DigitsWords | null {
-  const regExpression = getRegexp(searchDigits);
+  const regExpression = getRegexp(searchDigits, includeWC);
   const matches: string[] = [];
 
   // Test each word individually like the C# version
@@ -144,6 +149,7 @@ function lookupWords(
       dictionary,
       reducedDigits,
       noDigitsProcessed,
+      includeWC,
       onProgress
     );
   }
@@ -152,6 +158,7 @@ function lookupWords(
 export async function FindWords(
   dictionary: string[],
   digits: number[],
+  includeWC: boolean,
   onProgress?: ProgressCallback
 ): Promise<DigitsWords[]> {
   const maxChunkSize = 16;
@@ -167,6 +174,7 @@ export async function FindWords(
       dictionary,
       currentChunk,
       lastProcessedCount,
+      includeWC,
       onProgress
     );
 
